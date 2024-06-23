@@ -1,0 +1,27 @@
+pip install faker
+import json
+from faker import Faker
+
+def generate_random_users(count=200):
+    fake = Faker()
+    users = []
+
+    for _ in range(count):
+        user = {
+            'name': fake.name(),
+            'address': fake.address()
+        }
+        users.append(user)
+
+    return users
+
+def save_to_json(data, filename='random_users.json'):
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+
+if __name__ == "__main__":
+    user_count = 200
+    random_users = generate_random_users(user_count)
+    save_to_json(random_users)
+    print(f'{user_count} random user accounts have been generated and saved to random_users.json')
+python generate_users.py
